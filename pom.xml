@@ -169,7 +169,11 @@ the 'jars' submodule, and the project deployed (.esb) archive.
           <version>${jbossesb.version}</version>
           <type>jar</type>
           <scope>system</scope>
+          <!-- For JBoss ESB 4.3 -->
+          <systemPath>${jboss.home}/server/default/deploy/jbossesb.sar/lib/jbossesb-rosetta.jar</systemPath>
+          <!-- For JBoss ESB 5.x
          <systemPath>${jboss.home}/server/default/deployers/esb.deployer/lib/jbossesb-rosetta.jar</systemPath>
+         -->
         </dependency>
         <!--dependency>
           <groupId>log4j</groupId>
