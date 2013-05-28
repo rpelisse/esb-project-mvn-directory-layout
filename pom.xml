@@ -40,7 +40,7 @@ the 'jars' submodule, and the project deployed (.esb) archive.
 	</distributionManagement>
 
 	<build>
-		<finalName>${project.groupId}.${project.artifactId}.${project.version}</finalName>
+		<finalName>${project.artifactId}-${project.version}</finalName>
 
 		<resources>
 			<resource>
