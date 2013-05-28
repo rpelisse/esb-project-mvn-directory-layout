@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+    <parent>
+      <groupId>org.jboss.esb.samples</groupId>
+      <artifactId>main</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </parent>
+
+	<artifactId>esb-apps</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
+
+    <name>Parent project for all ESB projects</name>
+    <description><![CDATA[[
+    ]]></description>
+    <modules>
+      <module>sample-esb-app</module>
+    </modules>
+
+	<build>
+      <plugins>
+        <!-- Packaging plugin for creating .esb artifacts -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>jboss-packaging-maven-plugin</artifactId>
+          <version>2.3-rpelisse</version>
+          <extensions>true</extensions>
+          <executions>
+            <execution>
+              <id>build-esb</id>
+              <goals>
+                <goal>esb</goal>
+              </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
