@@ -4,25 +4,21 @@
 	parameterReloadSecs="5">
 
 	<providers>
-
 		<jms-provider name="JBossMQ" connection-factory="ConnectionFactory">
 			<jms-bus busid="quickstartEsbChannel">
-				<jms-message-filter dest-type="QUEUE" dest-name="queue/dbexample_quickstart_sql_action_Request_esb" selector="source='fromHelloworldSQLAction'" />
+                <jms-message-filter dest-type="QUEUE" dest-name="queue/DLQ"/>
 			</jms-bus>
-
 		</jms-provider>
-
 	</providers>
 
 	<services>
-		<service category="myCategory" name="mySqlListener" description="Hello World SQL Action (esb jdbc listener)">
+		<service category="myCategory" name="mySimpleService" description="A simple pipeline triggered by a JMS message">
 			<listeners>
-				<jms-listener name="helloWorldJmsAction" busidref="quickstartEsbChannel" />
+				<jms-listener name="helloWorldAction" busidref="quickstartEsbChannel" />
 			</listeners>
 			<actions mep="OneWay">
-				<action name="action2" class="org.jboss.soa.esb.actions.SystemPrintln" />
+				<action name="first-action" class="org.jboss.soa.esb.actions.SystemPrintln" />
 			</actions>
-
 		</service>
 	</services>
 
