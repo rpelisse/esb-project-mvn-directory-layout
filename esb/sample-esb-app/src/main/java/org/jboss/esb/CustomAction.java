@@ -50,7 +50,7 @@ public class CustomAction extends AbstractActionLifecycle {
 		logFooter();
 
 		// Set message properties and message body so that SystemPrintln will display message
-		message.getProperties().setProperty("jbesbfilename", "helloworldSQlAction.log");
+		message.getProperties().setProperty("custom property", "Custom Property");
 		message.getBody().add(results.toString());
 		return message;
 	}
