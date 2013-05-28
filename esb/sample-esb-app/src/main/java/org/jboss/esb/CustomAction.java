@@ -38,10 +38,10 @@ public class CustomAction extends AbstractActionLifecycle {
 		return message;
 	}
 
-	@SuppressWarnings("unchecked")
 	public Message displayMessage(final Message message) throws Exception {
 		logHeader();
-		final Map<String, Object> rowData = (Map) message.getBody().get();
+		@SuppressWarnings("unchecked")
+		final Map<String, Object> rowData = (Map<String,Object>) message.getBody().get();
 		final StringBuffer results = new StringBuffer();
 		for (final Map.Entry<String, Object> curr : rowData.entrySet()) {
 			results.append("column " + curr.getKey() + " = <" + curr.getValue() + ">");
