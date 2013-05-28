@@ -8,7 +8,12 @@
 
 	<packaging>pom</packaging>
 
-	<name>JBoss ESB Maven directory tree</name>
+    <name>JBoss ESB Maven directory tree</name>
+    <description><![CDATA[
+This project directory tree aims at simplify configuration of ESB project, but also enforce
+a clear separation between the Java source code used by custom action - build in jars from
+the 'jars' submodule, and the project deployed (.esb) archive.
+        ]]></description>
     <modules>
       <module>jars/business-objects</module>
       <module>esb</module>
