@@ -3,24 +3,41 @@
 	xsi:schemaLocation="http://anonsvn.labs.jboss.com/labs/jbossesb/trunk/product/etc/schemas/xml/jbossesb-1.0.1.xsd http://anonsvn.jboss.org/repos/labs/labs/jbossesb/trunk/product/etc/schemas/xml/jbossesb-1.0.1.xsd"
 	parameterReloadSecs="5">
 
-	<providers>
-		<jms-provider name="JBossMQ" connection-factory="ConnectionFactory">
-			<jms-bus busid="quickstartEsbChannel">
-                <jms-message-filter dest-type="QUEUE" dest-name="queue/DLQ"/>
-			</jms-bus>
-		</jms-provider>
-	</providers>
+  <providers>
+    <fs-provider name="FileSystemProvider">
+      <fs-bus busid="FileChannel" >
+        <fs-message-filter
+           directory="/tmp/incoming"
+           input-suffix=".dat"
+           work-suffix=".esbWorking"
+           post-delete="false"
+           post-directory="/tmp/output"
+           post-suffix=".sentToEsb"
+           error-delete="false"
+           error-directory="/tmp/error"
+           error-suffix=".IN_ERROR"/>
+      </fs-bus>
+    </fs-provider>
 
-	<services>
-		<service category="myCategory" name="mySimpleService" description="A simple pipeline triggered by a JMS message">
-			<listeners>
-				<jms-listener name="helloWorldAction" busidref="quickstartEsbChannel" />
-			</listeners>
-			<actions mep="OneWay">
-				<action name="first-action" class="org.jboss.soa.esb.actions.SystemPrintln" />
-			</actions>
-		</service>
-	</services>
+    <jms-provider name="JBossMQ" connection-factory="ConnectionFactory">
+      <jms-bus busid="quickstartEsbChannel">
+        <jms-message-filter dest-type="QUEUE" dest-name="queue/DLQ"/>
+      </jms-bus>
+    </jms-provider>
+  </providers>
+
+  <services>
+     <service category="myCategory" name="mySimpleService"
+              description="A simple pipeline triggered by a JMS message">
+       <listeners>
+         <jms-listener name="helloWorldAction" busidref="quickstartEsbChannel" />
+         <fs-listener name="FileGateway" busidref="FileChannel"
+                             is-gateway="true"  poll-frequency-seconds="10"/>
+       </listeners>
+       <actions mep="OneWay">
+         <action name="first-action" class="org.jboss.soa.esb.actions.SystemPrintln" />
+      </actions>
+    </service>
+  </services>
 
 </jbossesb>
-
